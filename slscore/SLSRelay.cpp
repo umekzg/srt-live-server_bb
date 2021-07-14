@@ -235,7 +235,7 @@ int CSLSRelay::open(const char * srt_url) {
     }
 
     int lossmaxttlvalue = 40;
-    srt_setsockflag(fd, SRTO_LOSSMAXTTL, &lossmaxttlvalue, sizeof (lossmaxttlvalue));
+    srt_setsockopt(fd, 0, SRTO_LOSSMAXTTL, &lossmaxttlvalue, sizeof (lossmaxttlvalue));
 
 //    srt_setsockflag(fd, SRTO_SENDER, &m_is_write, sizeof m_is_write);
 /*
