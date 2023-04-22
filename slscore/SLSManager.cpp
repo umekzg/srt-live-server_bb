@@ -196,18 +196,16 @@ json CSLSManager::create_json_stats_for_publisher(CSLSRole *role, int clear) {
     json ret = json::object();
     SRT_TRACEBSTATS stats;
     role->get_statistics(&stats, clear);
-    // Interval
-    //ret["pktRcvLoss"]       = stats.pktRcvLoss;
+    ret["latency"]         = stats.msRcvBuf;   
+    ret["encoder_bitrate"]    = stats.mbpsRecvRate;
+    ret["requested_bitrate"]  = role->get_bitrate(); // in kbps
+    ret["network"]    = stats.mbpsBandwidth;
+    ret["rtt"]              = stats.msRTT;
     ret["dropped_pkts"]       = stats.pktRcvDrop;
+    ret["uptime"]           = role->get_uptime(); // in seconds
+    //ret["pktRcvLoss"]       = stats.pktRcvLoss;
     //ret["bytesRcvLoss"]     = stats.byteRcvLoss;
     //ret["bytesRcvDrop"]     = stats.byteRcvDrop;
-    ret["encoder_bitrate"]     = stats.mbpsRecvRate;
-    // Instant
-    ret["rtt"]              = stats.msRTT;
-    ret["latency"]         = stats.msRcvBuf;
-    ret["network"]    = stats.mbpsBandwidth;
-    ret["requested_bitrate"]          = role->get_bitrate(); // in kbps
-    ret["uptime"]           = role->get_uptime(); // in seconds
     return ret;
 }
 
