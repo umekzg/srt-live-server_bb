@@ -197,8 +197,8 @@ json CSLSManager::create_json_stats_for_publisher(CSLSRole *role, int clear) {
     SRT_TRACEBSTATS stats;
     role->get_statistics(&stats, clear);
     ret["latency"]         = stats.msRcvBuf;   
-    ret["encoder_bitrate"]    = stats.mbpsRecvRate;
-    ret["requested_bitrate"]  = role->get_bitrate(); // in kbps
+    //ret["encoder_bitrate"]    = stats.mbpsRecvRate;
+    ret["bitrate"]  = role->get_bitrate(); // in kbps
     ret["network"]    = stats.mbpsBandwidth;
     ret["rtt"]              = stats.msRTT;
     ret["dropped_pkts"]       = stats.pktRcvDrop;
